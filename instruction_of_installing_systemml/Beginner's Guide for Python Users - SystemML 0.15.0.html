@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"><!--<![endif]--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>Beginner's Guide for Python Users - SystemML 0.15.0</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        
+        <meta name="description" content="Beginner's Guide for Python Users">
+        
+        <meta name="viewport" content="width=device-width">
+        <style class="anchorjs"></style><link rel="stylesheet" href="Beginner's%20Guide%20for%20Python%20Users%20-%20SystemML%200.15.0_files/bootstrap.css">
+        <link rel="stylesheet" href="Beginner's%20Guide%20for%20Python%20Users%20-%20SystemML%200.15.0_files/main.css">
+        <link rel="stylesheet" href="Beginner's%20Guide%20for%20Python%20Users%20-%20SystemML%200.15.0_files/pygments-default.css">
+        <link rel="shortcut icon" href="https://systemml.apache.org/docs/0.15.0/img/favicon.png">
+    <script src="Beginner's%20Guide%20for%20Python%20Users%20-%20SystemML%200.15.0_files/MathJax.js" id=""></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MathJax .MJX-monospace {font-family: monospace}
+.MathJax .MJX-sans-serif {font-family: sans-serif}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax:focus, body :focus .MathJax {display: inline-table}
+.MathJax.MathJax_FullWidth {text-align: center; display: table-cell!important; width: 10000em!important}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap!important}
+.MathJax img {display: inline!important; float: none!important}
+.MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax_Processed {display: none!important}
+.MathJax_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none}
+.MathJax .MathJax_EmBox {display: block!important; overflow: hidden; width: 1px; height: 60em; min-height: 0; max-height: none}
+.MathJax_LineBox {display: table!important}
+.MathJax_LineBox span {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
+.MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)}
+.MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent}
+#MathJax_Tooltip * {filter: none; opacity: 1; background: transparent}
+@font-face {font-family: MathJax_Main; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Main-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Main-Regular.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Main; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Main-Bold.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Main-Bold.otf?V=2.7.1') format('opentype'); font-weight: bold}
+@font-face {font-family: MathJax_Main; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Main-Italic.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Main-Italic.otf?V=2.7.1') format('opentype'); font-style: italic}
+@font-face {font-family: MathJax_Math; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Math-Italic.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Math-Italic.otf?V=2.7.1') format('opentype'); font-style: italic}
+@font-face {font-family: MathJax_Caligraphic; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Regular.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Size1; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Size1-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Size1-Regular.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Size2; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Size2-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Size2-Regular.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Size3; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Size3-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Size3-Regular.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Size4; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Size4-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Size4-Regular.otf?V=2.7.1') format('opentype')}
+.MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+    <body><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px none; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div id="MathJax_Message" style="display: none;"></div>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+
+        <header class="navbar navbar-default navbar-fixed-top" id="topbar">
+            <div class="container">
+                <div class="navbar-header">
+                    <div class="navbar-brand brand projectlogo">
+                        <a href="http://systemml.apache.org/"><img class="logo" src="Beginner's%20Guide%20for%20Python%20Users%20-%20SystemML%200.15.0_files/systemml-logo.png" alt="Apache SystemML" title="Apache SystemML"></a>
+                    </div>
+                    <div class="navbar-brand brand projecttitle">
+                        <a href="http://systemml.apache.org/">Apache SystemML<sup id="trademark">™</sup></a><br>
+                        <span class="version">0.15.0</span>
+                    </div>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <nav class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="https://systemml.apache.org/docs/0.15.0/index.html">Overview</a></li>
+                        <li><a href="https://github.com/apache/systemml">GitHub</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation<b class="caret"></b></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><b>Running SystemML:</b></li>
+                                <li><a href="https://github.com/apache/systemml">SystemML GitHub README</a></li>
+                                <li><a href="https://systemml.apache.org/docs/0.15.0/spark-mlcontext-programming-guide.html">Spark MLContext</a></li>
+                                <li><a href="https://systemml.apache.org/docs/0.15.0/spark-batch-mode.html">Spark Batch Mode</a>
+                                </li><li><a href="https://systemml.apache.org/docs/0.15.0/hadoop-batch-mode.html">Hadoop Batch Mode</a>
+                                </li><li><a href="https://systemml.apache.org/docs/0.15.0/standalone-guide.html">Standalone Guide</a></li>
+                                <li><a href="https://systemml.apache.org/docs/0.15.0/jmlc.html">Java Machine Learning Connector (JMLC)</a>
+                                </li><li class="divider"></li>
+                                <li><b>Language Guides:</b></li>
+                                <li><a href="https://systemml.apache.org/docs/0.15.0/dml-language-reference.html">DML Language Reference</a></li>
+                                <li><a href="https://systemml.apache.org/docs/0.15.0/beginners-guide-to-dml-and-pydml.html">Beginner's Guide to DML and PyDML</a></li>
+                                <li><a href="https://systemml.apache.org/docs/0.15.0/beginners-guide-python.html">Beginner's Guide for Python Users</a></li>
+                                <li><a href="https://systemml.apache.org/docs/0.15.0/python-reference.html">Reference Guide for Python Users</a></li>
+                                <li class="divider"></li>
+                                <li><b>ML Algorithms:</b></li>
+                                <li><a href="https://systemml.apache.org/docs/0.15.0/algorithms-reference.html">Algorithms Reference</a></li>
+                                <li class="divider"></li>
+                                <li><b>Tools:</b></li>
+                                <li><a href="https://systemml.apache.org/docs/0.15.0/debugger-guide.html">Debugger Guide</a></li>
+                                <li><a href="https://systemml.apache.org/docs/0.15.0/developer-tools-systemml.html">IDE Guide</a></li>
+                                <li class="divider"></li>
+                                <li><b>Other:</b></li>
+                                <li><a href="https://systemml.apache.org/docs/0.15.0/contributing-to-systemml.html">Contributing to SystemML</a></li>
+                                <li><a href="https://systemml.apache.org/docs/0.15.0/engine-dev-guide.html">Engine Developer Guide</a></li>
+                                <li><a href="https://systemml.apache.org/docs/0.15.0/troubleshooting-guide.html">Troubleshooting Guide</a></li>
+                                <li><a href="https://systemml.apache.org/docs/0.15.0/release-process.html">Release Process</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">API Docs<b class="caret"></b></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="https://systemml.apache.org/docs/0.15.0/api/java/index.html">Java</a></li>
+                                <li><a href="https://systemml.apache.org/docs/0.15.0/api/python/index.html">Python</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Issues<b class="caret"></b></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><b>JIRA:</b></li>
+                                <li><a href="https://issues.apache.org/jira/browse/SYSTEMML">SystemML JIRA</a></li>
+                                
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <div class="container" id="content">
+          
+            <h1 class="title" id="beginners-guide-for-python-users"><a class="anchorjs-link " href="#beginners-guide-for-python-users" aria-label="Anchor link for: beginners guide for python users" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Beginner's Guide for Python Users</h1>
+          
+
+          <!--
+
+-->
+
+<ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#download--setup" id="markdown-toc-download--setup">Download &amp; Setup</a>    <ul>
+      <li><a href="#install-java-need-java-8-and-apache-spark" id="markdown-toc-install-java-need-java-8-and-apache-spark">Install Java (need Java 8) and Apache Spark</a></li>
+      <li><a href="#install-systemml" id="markdown-toc-install-systemml">Install SystemML</a></li>
+      <li><a href="#uninstall-systemml" id="markdown-toc-uninstall-systemml">Uninstall SystemML</a></li>
+      <li><a href="#start-pyspark-shell" id="markdown-toc-start-pyspark-shell">Start Pyspark shell</a></li>
+    </ul>
+  </li>
+  <li><a href="#matrix-operations" id="markdown-toc-matrix-operations">Matrix operations</a></li>
+  <li><a href="#invoke-systemmls-algorithms" id="markdown-toc-invoke-systemmls-algorithms">Invoke SystemML’s algorithms</a>    <ul>
+      <li><a href="#scikit-learn-interface" id="markdown-toc-scikit-learn-interface">Scikit-learn interface</a></li>
+      <li><a href="#passing-pyspark-dataframe" id="markdown-toc-passing-pyspark-dataframe">Passing PySpark DataFrame</a></li>
+      <li><a href="#mlpipeline-interface" id="markdown-toc-mlpipeline-interface">MLPipeline interface</a></li>
+    </ul>
+  </li>
+  <li><a href="#invoking-dmlpydml-scripts-using-mlcontext" id="markdown-toc-invoking-dmlpydml-scripts-using-mlcontext">Invoking DML/PyDML scripts using MLContext</a></li>
+</ul>
+
+<p><br></p>
+
+<h2 id="introduction"><a class="anchorjs-link " href="#introduction" aria-label="Anchor link for: introduction" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Introduction</h2>
+
+<p>SystemML enables flexible, scalable machine learning. This 
+flexibility is achieved through the specification of a high-level 
+declarative machine learning language that comes in two flavors, 
+one with an R-like syntax (DML) and one with a Python-like syntax 
+(PyDML).</p>
+
+<p>Algorithm scripts written in DML and PyDML can be run on Hadoop, on Spark, or in Standalone mode. 
+No script modifications are required to change between modes. SystemML automatically performs advanced optimizations 
+based on data and cluster characteristics, so much of the need to manually tweak algorithms is largely reduced or eliminated.
+To understand more about DML and PyDML, we recommend that you read <a href="https://apache.github.io/systemml/beginners-guide-to-dml-and-pydml.html">Beginner’s Guide to DML and PyDML</a>.</p>
+
+<p>For convenience of Python users, SystemML exposes several language-level APIs that allow Python users to use SystemML
+and its algorithms without the need to know DML or PyDML. We explain these APIs in the below sections with example usecases.</p>
+
+<h2 id="download--setup"><a class="anchorjs-link " href="#download--setup" aria-label="Anchor link for: download  setup" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Download &amp; Setup</h2>
+
+<p>Before you get started on SystemML, make sure that your environment is set up and ready to go.</p>
+
+<h3 id="install-java-need-java-8-and-apache-spark"><a class="anchorjs-link " href="#install-java-need-java-8-and-apache-spark" aria-label="Anchor link for: install java need java 8 and apache spark" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Install Java (need Java 8) and Apache Spark</h3>
+
+<p>If you already have an Apache Spark installation, you can skip this step.</p>
+
+<ul class="nav nav-tabs" data-tabs="tabs"><li class=""><a class="tab_OSX" href="#tab_OSX_0"><b>OSX</b></a></li><li class="active"><a class="tab_Linux" href="#tab_Linux_0"><b>Linux</b></a></li></ul><div class="codetabs tab-content">
+<div data-lang="OSX" class="tab-pane" id="tab_OSX_0">
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>/usr/bin/ruby -e <span class="s2">"</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">"</span>
+brew tap caskroom/cask
+brew install Caskroom/cask/java
+brew tap homebrew/versions
+brew install apache-spark16
+</code></pre>
+    </div>
+  </div>
+<div data-lang="Linux" class="tab-pane active" id="tab_Linux_0">
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>ruby -e <span class="s2">"</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install<span class="k">)</span><span class="s2">"</span>
+brew tap caskroom/cask
+brew install Caskroom/cask/java
+brew tap homebrew/versions
+brew install apache-spark16
+</code></pre>
+    </div>
+  </div>
+</div>
+
+<h3 id="install-systemml"><a class="anchorjs-link " href="#install-systemml" aria-label="Anchor link for: install systemml" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Install SystemML</h3>
+
+<p>To install released SystemML, please use following commands:</p>
+
+<ul class="nav nav-tabs" data-tabs="tabs"><li class=""><a class="tab_Python_2" href="#tab_Python_2_1"><b>Python 2</b></a></li><li class="active"><a class="tab_Python_3" href="#tab_Python_3_1"><b>Python 3</b></a></li></ul><div class="codetabs tab-content">
+<div data-lang="Python 2" class="tab-pane" id="tab_Python_2_1">
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>pip install systemml
+</code></pre>
+    </div>
+  </div>
+<div data-lang="Python 3" class="tab-pane active" id="tab_Python_3_1">
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>pip3 install systemml
+</code></pre>
+    </div>
+  </div>
+</div>
+
+<p>If you want to try out the bleeding edge version, please use following commands:</p>
+
+<ul class="nav nav-tabs" data-tabs="tabs"><li class=""><a class="tab_Python_2" href="#tab_Python_2_2"><b>Python 2</b></a></li><li class="active"><a class="tab_Python_3" href="#tab_Python_3_2"><b>Python 3</b></a></li></ul><div class="codetabs tab-content">
+<div data-lang="Python 2" class="tab-pane" id="tab_Python_2_2">
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>git checkout https://github.com/apache/systemml.git
+<span class="nb">cd </span>systemml
+mvn clean package -P distribution
+pip install target/systemml-1.0.0-SNAPSHOT-python.tgz
+</code></pre>
+    </div>
+  </div>
+<div data-lang="Python 3" class="tab-pane active" id="tab_Python_3_2">
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>git checkout https://github.com/apache/systemml.git
+<span class="nb">cd </span>systemml
+mvn clean package -P distribution
+pip3 install target/systemml-1.0.0-SNAPSHOT-python.tgz
+</code></pre>
+    </div>
+  </div>
+</div>
+
+<h3 id="uninstall-systemml"><a class="anchorjs-link " href="#uninstall-systemml" aria-label="Anchor link for: uninstall systemml" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Uninstall SystemML</h3>
+<p>To uninstall SystemML, please use following command:</p>
+
+<ul class="nav nav-tabs" data-tabs="tabs"><li class=""><a class="tab_Python_2" href="#tab_Python_2_3"><b>Python 2</b></a></li><li class="active"><a class="tab_Python_3" href="#tab_Python_3_3"><b>Python 3</b></a></li></ul><div class="codetabs tab-content">
+<div data-lang="Python 2" class="tab-pane" id="tab_Python_2_3">
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>pip uninstall systemml
+</code></pre>
+    </div>
+  </div>
+<div data-lang="Python 3" class="tab-pane active" id="tab_Python_3_3">
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>pip3 uninstall systemml
+</code></pre>
+    </div>
+  </div>
+</div>
+
+<h3 id="start-pyspark-shell"><a class="anchorjs-link " href="#start-pyspark-shell" aria-label="Anchor link for: start pyspark shell" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Start Pyspark shell</h3>
+
+<ul class="nav nav-tabs" data-tabs="tabs"><li class=""><a class="tab_Python_2" href="#tab_Python_2_4"><b>Python 2</b></a></li><li class="active"><a class="tab_Python_3" href="#tab_Python_3_4"><b>Python 3</b></a></li></ul><div class="codetabs tab-content">
+<div data-lang="Python 2" class="tab-pane" id="tab_Python_2_4">
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>pyspark
+</code></pre>
+    </div>
+  </div>
+<div data-lang="Python 3" class="tab-pane active" id="tab_Python_3_4">
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nv">PYSPARK_PYTHON</span><span class="o">=</span>python3 pyspark
+</code></pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<h2 id="matrix-operations"><a class="anchorjs-link " href="#matrix-operations" aria-label="Anchor link for: matrix operations" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Matrix operations</h2>
+
+<p>To get started with SystemML, let’s try few elementary matrix multiplication operations:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">systemml</span> <span class="kn">as</span> <span class="nn">sml</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">m1</span> <span class="o">=</span> <span class="n">sml</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">m2</span> <span class="o">=</span> <span class="n">sml</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">m2</span> <span class="o">=</span> <span class="n">m1</span> <span class="o">*</span> <span class="p">(</span><span class="n">m2</span> <span class="o">+</span> <span class="n">m1</span><span class="p">)</span>
+<span class="n">m4</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">m2</span>
+<span class="n">m4</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">toNumPy</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>Output:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">60.</span><span class="p">],</span>
+       <span class="p">[</span><span class="o">-</span><span class="mf">60.</span><span class="p">],</span>
+       <span class="p">[</span><span class="o">-</span><span class="mf">60.</span><span class="p">]])</span>
+</code></pre>
+</div>
+
+<p>Let us now write a simple script to train <a href="https://apache.github.io/systemml/algorithms-regression.html#linear-regression">linear regression</a> 
+model: <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-1-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;&amp;#x03B2;&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mi&gt;s&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;X&lt;/mi&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;/msup&gt;&lt;mi&gt;X&lt;/mi&gt;&lt;mo&gt;,&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;X&lt;/mi&gt;&lt;mi&gt;T&lt;/mi&gt;&lt;/msup&gt;&lt;mi&gt;y&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1" style="width: 12.502em; display: inline-block;"><span style="display: inline-block; position: relative; width: 9.615em; height: 0px; font-size: 130%;"><span style="position: absolute; clip: rect(1.226em, 1009.52em, 2.606em, -1000em); top: -2.212em; left: 0em;"><span class="mrow" id="MathJax-Span-2"><span class="mi" id="MathJax-Span-3" style="font-family: MathJax_Math; font-style: italic;">β<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.007em;"></span></span><span class="mo" id="MathJax-Span-4" style="font-family: MathJax_Main; padding-left: 0.278em;">=</span><span class="mi" id="MathJax-Span-5" style="font-family: MathJax_Math; font-style: italic; padding-left: 0.278em;">s</span><span class="mi" id="MathJax-Span-6" style="font-family: MathJax_Math; font-style: italic;">o</span><span class="mi" id="MathJax-Span-7" style="font-family: MathJax_Math; font-style: italic;">l</span><span class="mi" id="MathJax-Span-8" style="font-family: MathJax_Math; font-style: italic;">v</span><span class="mi" id="MathJax-Span-9" style="font-family: MathJax_Math; font-style: italic;">e</span><span class="mo" id="MathJax-Span-10" style="font-family: MathJax_Main;">(</span><span class="msubsup" id="MathJax-Span-11"><span style="display: inline-block; position: relative; width: 1.482em; height: 0px;"><span style="position: absolute; clip: rect(3.163em, 1000.85em, 4.135em, -1000em); top: -3.99em; left: 0em;"><span class="mi" id="MathJax-Span-12" style="font-family: MathJax_Math; font-style: italic;">X<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.024em;"></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; top: -4.353em; left: 0.909em;"><span class="mi" id="MathJax-Span-13" style="font-size: 70.7%; font-family: MathJax_Math; font-style: italic;">T<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.085em;"></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span></span><span class="mi" id="MathJax-Span-14" style="font-family: MathJax_Math; font-style: italic;">X<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.024em;"></span></span><span class="mo" id="MathJax-Span-15" style="font-family: MathJax_Main;">,</span><span class="msubsup" id="MathJax-Span-16" style="padding-left: 0.167em;"><span style="display: inline-block; position: relative; width: 1.482em; height: 0px;"><span style="position: absolute; clip: rect(3.163em, 1000.85em, 4.135em, -1000em); top: -3.99em; left: 0em;"><span class="mi" id="MathJax-Span-17" style="font-family: MathJax_Math; font-style: italic;">X<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.024em;"></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; top: -4.353em; left: 0.909em;"><span class="mi" id="MathJax-Span-18" style="font-size: 70.7%; font-family: MathJax_Math; font-style: italic;">T<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.085em;"></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span></span><span class="mi" id="MathJax-Span-19" style="font-family: MathJax_Math; font-style: italic;">y<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.006em;"></span></span><span class="mo" id="MathJax-Span-20" style="font-family: MathJax_Main;">)</span></span><span style="display: inline-block; width: 0px; height: 2.212em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.388em; border-left: 0px solid; width: 0px; height: 1.544em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>β</mi><mo>=</mo><mi>s</mi><mi>o</mi><mi>l</mi><mi>v</mi><mi>e</mi><mo stretchy="false">(</mo><msup><mi>X</mi><mi>T</mi></msup><mi>X</mi><mo>,</mo><msup><mi>X</mi><mi>T</mi></msup><mi>y</mi><mo stretchy="false">)</mo></math></span></span><script type="math/tex" id="MathJax-Element-1"> \beta = solve(X^T X, X^T y) </script>. For simplicity, we will use direct-solve method and ignore
+regularization parameter as well as intercept.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">import</span> <span class="nn">systemml</span> <span class="kn">as</span> <span class="nn">sml</span>
+<span class="c"># Load the diabetes dataset</span>
+<span class="n">diabetes</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">()</span>
+<span class="c"># Use only one feature</span>
+<span class="n">diabetes_X</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="c"># Split the data into training/testing sets</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">diabetes_X</span><span class="p">[:</span><span class="o">-</span><span class="mi">20</span><span class="p">]</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">diabetes_X</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">:]</span>
+<span class="c"># Split the targets into training/testing sets</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">target</span><span class="p">[:</span><span class="o">-</span><span class="mi">20</span><span class="p">]</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">:]</span>
+<span class="c"># Train Linear Regression model</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">sml</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">sml</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="n">sml</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">toNumPy</span><span class="p">()</span>
+<span class="n">y_predicted</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Residual sum of squares: </span><span class="si">%.2</span><span class="s">f'</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y_predicted</span> <span class="o">-</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span> 
+</code></pre>
+</div>
+
+<p>Output:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>Residual sum of squares: 25282.12
+</code></pre>
+</div>
+
+<p>We can improve the residual error by adding an intercept and regularization parameter. To do so, we
+will use <code class="highlighter-rouge">mllearn</code> API described in the next section.</p>
+
+<hr>
+
+<h2 id="invoke-systemmls-algorithms"><a class="anchorjs-link " href="#invoke-systemmls-algorithms" aria-label="Anchor link for: invoke systemmls algorithms" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Invoke SystemML’s algorithms</h2>
+
+<p>SystemML also exposes a subpackage <a href="https://apache.github.io/systemml/python-reference#mllearn-api">mllearn</a>. This subpackage allows Python users to invoke SystemML algorithms
+using Scikit-learn or MLPipeline API.</p>
+
+<h3 id="scikit-learn-interface"><a class="anchorjs-link " href="#scikit-learn-interface" aria-label="Anchor link for: scikit learn interface" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Scikit-learn interface</h3>
+
+<p>In the below example, we invoke SystemML’s <a href="https://apache.github.io/systemml/algorithms-regression.html#linear-regression">Linear Regression</a>
+algorithm.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">systemml.mllearn</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="c"># Load the diabetes dataset</span>
+<span class="n">diabetes</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_diabetes</span><span class="p">()</span>
+<span class="c"># Use only one feature</span>
+<span class="n">diabetes_X</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="c"># Split the data into training/testing sets</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">diabetes_X</span><span class="p">[:</span><span class="o">-</span><span class="mi">20</span><span class="p">]</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">diabetes_X</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">:]</span>
+<span class="c"># Split the targets into training/testing sets</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">target</span><span class="p">[:</span><span class="o">-</span><span class="mi">20</span><span class="p">]</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">diabetes</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">:]</span>
+<span class="c"># Create linear regression object</span>
+<span class="n">regr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">spark</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s">"inf"</span><span class="p">),</span> <span class="n">solver</span><span class="o">=</span><span class="s">'direct-solve'</span><span class="p">)</span>
+<span class="c"># Train the model using the training sets</span>
+<span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_predicted</span> <span class="o">=</span> <span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Residual sum of squares: </span><span class="si">%.2</span><span class="s">f'</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y_predicted</span> <span class="o">-</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span> 
+</code></pre>
+</div>
+
+<p>Output:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>Residual sum of squares: 6991.17
+</code></pre>
+</div>
+
+<p>As expected, by adding intercept and regularizer the residual error drops significantly.</p>
+
+<p>Here is another example that where we invoke SystemML’s <a href="https://apache.github.io/systemml/algorithms-classification.html#multinomial-logistic-regression">Logistic Regression</a>
+algorithm on digits datasets.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># Scikit-learn way</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">neighbors</span>
+<span class="kn">from</span> <span class="nn">systemml.mllearn</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="n">digits</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_digits</span><span class="p">()</span>
+<span class="n">X_digits</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">data</span>
+<span class="n">y_digits</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_digits</span><span class="p">)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_digits</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="o">.</span><span class="mi">9</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">)]</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">y_digits</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="o">.</span><span class="mi">9</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">)]</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_digits</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="o">.</span><span class="mi">9</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">):]</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">y_digits</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="o">.</span><span class="mi">9</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">):]</span>
+<span class="n">logistic</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">spark</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'LogisticRegression score: </span><span class="si">%</span><span class="s">f'</span> <span class="o">%</span> <span class="n">logistic</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<p>Output:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>LogisticRegression score: 0.927778
+</code></pre>
+</div>
+
+<p>You can also save the trained model and load it later for prediction:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># Assuming logistic.fit(X_train, y_train) is already invoked</span>
+<span class="n">logistic</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">'logistic_model'</span><span class="p">)</span>
+<span class="n">new_logistic</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">spark</span><span class="p">)</span>
+<span class="n">new_logistic</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">'logistic_model'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'LogisticRegression score: </span><span class="si">%</span><span class="s">f'</span> <span class="o">%</span> <span class="n">new_logistic</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<h3 id="passing-pyspark-dataframe"><a class="anchorjs-link " href="#passing-pyspark-dataframe" aria-label="Anchor link for: passing pyspark dataframe" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Passing PySpark DataFrame</h3>
+
+<p>To train the above algorithm on larger dataset, we can load the dataset into DataFrame and pass it to the <code class="highlighter-rouge">fit</code> method:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">systemml.mllearn</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="kn">import</span> <span class="nn">systemml</span> <span class="kn">as</span> <span class="nn">sml</span>
+<span class="n">digits</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_digits</span><span class="p">()</span>
+<span class="n">X_digits</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">data</span>
+<span class="n">y_digits</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_digits</span><span class="p">)</span>
+<span class="c"># Split the data into training/testing sets and convert to PySpark DataFrame</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">sml</span><span class="o">.</span><span class="n">convertToLabeledDF</span><span class="p">(</span><span class="n">sqlCtx</span><span class="p">,</span> <span class="n">X_digits</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="o">.</span><span class="mi">9</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">)],</span> <span class="n">y_digits</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="o">.</span><span class="mi">9</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">)])</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_digits</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="o">.</span><span class="mi">9</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">):]))</span>
+<span class="n">logistic</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">spark</span><span class="p">)</span>
+<span class="n">logistic</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">)</span>
+<span class="n">y_predicted</span> <span class="o">=</span> <span class="n">logistic</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">y_predicted</span> <span class="o">=</span> <span class="n">y_predicted</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">'prediction'</span><span class="p">)</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span><span class="o">.</span><span class="n">as_matrix</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">y_digits</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="o">.</span><span class="mi">9</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">):]</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'LogisticRegression score: </span><span class="si">%</span><span class="s">f'</span> <span class="o">%</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_predicted</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<p>Output:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>LogisticRegression score: 0.922222
+</code></pre>
+</div>
+
+<h3 id="mlpipeline-interface"><a class="anchorjs-link " href="#mlpipeline-interface" aria-label="Anchor link for: mlpipeline interface" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>MLPipeline interface</h3>
+
+<p>In the below example, we demonstrate how the same <code class="highlighter-rouge">LogisticRegression</code> class can allow SystemML to fit seamlessly into 
+large data pipelines.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># MLPipeline way</span>
+<span class="kn">from</span> <span class="nn">pyspark.ml</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">systemml.mllearn</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">pyspark.ml.feature</span> <span class="kn">import</span> <span class="n">HashingTF</span><span class="p">,</span> <span class="n">Tokenizer</span>
+<span class="n">training</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">"a b c d e spark"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">"b d"</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">"spark f g h"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">"hadoop mapreduce"</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s">"b spark who"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s">"g d a y"</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s">"spark fly"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="s">"was mapreduce"</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s">"e spark program"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="s">"a e c l"</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">"spark compile"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="s">"hadoop software"</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="p">],</span> <span class="p">[</span><span class="s">"id"</span><span class="p">,</span> <span class="s">"text"</span><span class="p">,</span> <span class="s">"label"</span><span class="p">])</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">inputCol</span><span class="o">=</span><span class="s">"text"</span><span class="p">,</span> <span class="n">outputCol</span><span class="o">=</span><span class="s">"words"</span><span class="p">)</span>
+<span class="n">hashingTF</span> <span class="o">=</span> <span class="n">HashingTF</span><span class="p">(</span><span class="n">inputCol</span><span class="o">=</span><span class="s">"words"</span><span class="p">,</span> <span class="n">outputCol</span><span class="o">=</span><span class="s">"features"</span><span class="p">,</span> <span class="n">numFeatures</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">sqlCtx</span><span class="p">)</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">stages</span><span class="o">=</span><span class="p">[</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">hashingTF</span><span class="p">,</span> <span class="n">lr</span><span class="p">])</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">training</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">([</span>
+    <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="s">"spark i j k"</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="s">"l m n"</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="s">"mapreduce spark"</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="s">"apache hadoop"</span><span class="p">)],</span> <span class="p">[</span><span class="s">"id"</span><span class="p">,</span> <span class="s">"text"</span><span class="p">])</span>
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+<span class="n">prediction</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>Output:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>+-------+---+---------------+------------------+--------------------+--------------------+----------+
+|__INDEX| id|           text|             words|            features|         probability|prediction|
++-------+---+---------------+------------------+--------------------+--------------------+----------+
+|    1.0| 12|    spark i j k|  <span class="o">[</span>spark, i, j, k]|<span class="o">(</span>20,[5,6,7],[2.0,...|[0.99999999999975...|       1.0|
+|    2.0| 13|          l m n|         <span class="o">[</span>l, m, n]|<span class="o">(</span>20,[8,9,10],[1.0...|[1.37552128844736...|       2.0|
+|    3.0| 14|mapreduce spark|[mapreduce, spark]|<span class="o">(</span>20,[5,10],[1.0,1...|[0.99860290938153...|       1.0|
+|    4.0| 15|  apache hadoop|  <span class="o">[</span>apache, hadoop]|<span class="o">(</span>20,[9,14],[1.0,1...|[5.41688748236143...|       2.0|
++-------+---+---------------+------------------+--------------------+--------------------+----------+
+</code></pre>
+</div>
+
+<hr>
+
+<h2 id="invoking-dmlpydml-scripts-using-mlcontext"><a class="anchorjs-link " href="#invoking-dmlpydml-scripts-using-mlcontext" aria-label="Anchor link for: invoking dmlpydml scripts using mlcontext" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Invoking DML/PyDML scripts using MLContext</h2>
+
+<p>The below example demonstrates how to invoke the algorithm <a href="https://github.com/apache/systemml/blob/master/scripts/algorithms/MultiLogReg.dml">scripts/algorithms/MultiLogReg.dml</a>
+using Python <a href="https://apache.github.io/systemml/spark-mlcontext-programming-guide">MLContext API</a>.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SQLContext</span>
+<span class="kn">import</span> <span class="nn">systemml</span> <span class="kn">as</span> <span class="nn">sml</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="n">digits</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_digits</span><span class="p">()</span>
+<span class="n">X_digits</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">data</span>
+<span class="n">y_digits</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_digits</span><span class="p">)</span>
+<span class="c"># Split the data into training/testing sets and convert to PySpark DataFrame</span>
+<span class="n">X_df</span> <span class="o">=</span> <span class="n">sqlCtx</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_digits</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="o">.</span><span class="mi">9</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">)]))</span>
+<span class="n">y_df</span> <span class="o">=</span> <span class="n">sqlCtx</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y_digits</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="o">.</span><span class="mi">9</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">)]))</span>
+<span class="n">ml</span> <span class="o">=</span> <span class="n">sml</span><span class="o">.</span><span class="n">MLContext</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
+<span class="c"># Run the MultiLogReg.dml script at the given URL</span>
+<span class="n">scriptUrl</span> <span class="o">=</span> <span class="s">"https://raw.githubusercontent.com/apache/systemml/master/scripts/algorithms/MultiLogReg.dml"</span>
+<span class="n">script</span> <span class="o">=</span> <span class="n">sml</span><span class="o">.</span><span class="n">dml</span><span class="p">(</span><span class="n">scriptUrl</span><span class="p">)</span><span class="o">.</span><span class="nb">input</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">X_df</span><span class="p">,</span> <span class="n">Y_vec</span><span class="o">=</span><span class="n">y_df</span><span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="s">"B_out"</span><span class="p">)</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="n">ml</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">script</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'B_out'</span><span class="p">)</span><span class="o">.</span><span class="n">toNumPy</span><span class="p">()</span>
+</code></pre>
+</div>
+
+
+        </div> <!-- /container -->
+
+        
+
+        <script async="" src="Beginner's%20Guide%20for%20Python%20Users%20-%20SystemML%200.15.0_files/analytics.js"></script><script src="Beginner's%20Guide%20for%20Python%20Users%20-%20SystemML%200.15.0_files/jquery-1.js"></script>
+        <script src="Beginner's%20Guide%20for%20Python%20Users%20-%20SystemML%200.15.0_files/bootstrap.js"></script>
+        <script src="Beginner's%20Guide%20for%20Python%20Users%20-%20SystemML%200.15.0_files/anchor.js"></script>
+        <script src="Beginner's%20Guide%20for%20Python%20Users%20-%20SystemML%200.15.0_files/main.js"></script>
+        
+
+
+
+
+        <!-- Analytics -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-71553733-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+
+
+
+        <!-- MathJax Section -->
+        <script type="text/x-mathjax-config;executed=true">
+            MathJax.Hub.Config({
+                TeX: { equationNumbers: { autoNumber: "AMS" } }
+            });
+        </script>
+        <script>
+            // Note that we load MathJax this way to work with local file (file://), HTTP and HTTPS.
+            // We could use "//cdn.mathjax...", but that won't support "file://".
+            (function(d, script) {
+                script = d.createElement('script');
+                script.type = 'text/javascript';
+                script.async = true;
+                script.onload = function(){
+                    MathJax.Hub.Config({
+                        tex2jax: {
+                            inlineMath: [ ["$", "$"], ["\\\\(","\\\\)"] ],
+                            displayMath: [ ["$$","$$"], ["\\[", "\\]"] ],
+                            processEscapes: true,
+                            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+                        }
+                    });
+                };
+                script.src = ('https:' == document.location.protocol ? 'https://' : 'http://') +
+                    'cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+                d.getElementsByTagName('head')[0].appendChild(script);
+            }(document));
+        </script>
+    
+
+<div style="position: absolute; width: 0px; height: 0px; overflow: hidden; padding: 0px; border: 0px none; margin: 0px;"><div id="MathJax_Font_Test" style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; padding: 0px; border: 0px none; margin: 0px; white-space: nowrap; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-size-adjust: none; font-family: MathJax_Main, sans-serif;"></div></div></body></html>
